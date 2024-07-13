@@ -1,3 +1,5 @@
+use proconio::input;
+
 fn main() {
     println!("Hello, world!");
     /* Chapter 03: Hello, world! */
@@ -41,4 +43,14 @@ fn main() {
     let avogadro_constant;
     avogadro_constant = 6.02e+23;
     println!("{}", avogadro_constant);
+
+    /* Chapter 07: Receipt of inputs */
+    // Input
+    //proconio::input! {
+    input! {
+        n: i32,
+        a: i32,
+        b: i32,
+    }
+    println!("{}", n - a + b);
 }
