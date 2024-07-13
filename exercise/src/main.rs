@@ -1,8 +1,10 @@
-use std::f32::consts::PI;
-
 fn main() {
     proconio::input! {
-        r: f32,
+        n: i32,
     }
-    println!("{}", 2.0 * r * PI);
+    if n % 2 == 0 {
+        println!("White");
+    } else {
+        println!("Black");
+    }
 }
