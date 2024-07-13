@@ -53,4 +53,14 @@ fn main() {
         b: i32,
     }
     println!("{}", n - a + b);
+
+    /* Chapter 08: if expression */
+    let x = 10;
+    if x < 10 {
+        println!("small");
+    } else if x > 10 {
+        println!("large");
+    } else {
+        println!("10");
+    }
 }
