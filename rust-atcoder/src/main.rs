@@ -63,4 +63,34 @@ fn main() {
     } else {
         println!("10");
     }
+
+    /* Chapter 09: Block and scope */
+    // block
+    println!("before");
+    {
+        println!("in");
+    }
+    println!("after");
+    // shadowing
+    let sh = 10;
+    println!("{}", sh);
+    let sh = 20;
+    println!("{}", sh);
+    {
+        println!("{}", sh);
+        let sh = 30;
+        println!("{}", sh);
+    }
+    println!("{}", sh);
+    // block returns value
+    println!("before block");
+    let hoge = {
+        println!("in block");
+        10
+    };
+    println!("after block: {}", hoge);
+    let x = -1;
+    let abs;
+    abs = if x >= 0 { x } else { -x };
+    println!("abs = {}", abs);
 }
