@@ -1,8 +1,15 @@
 fn main() {
     proconio::input! {
+        n: i32,
         x: i32,
-        y: i32,
-        z: i32,
+        t: i32,
     }
-    println!("{} {} {}", z, x, y);
+    let cnt = n / x;
+    let ans;
+    if n % x != 0 {
+        ans = cnt + 1;
+    } else {
+        ans = cnt;
+    }
+    println!("{}", ans * t);
 }
