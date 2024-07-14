@@ -121,4 +121,31 @@ fn main() {
     } else {
         println!("cannot divide by 0");
     }
+
+    /* Chapter 11: Tuple  */
+    // tuple
+    let tuple: (i32, f64, i32) = (10, 2.5, 20);
+    println!("1st: {}", tuple.0);
+    println!("2nd: {}", tuple.1);
+    println!("3rd: {}", tuple.2);
+    // pattern match
+    let tuple = (10, 2.5);
+    let (x, y) = tuple;
+    assert_eq!(x, 10);
+    assert_eq!(y, 2.5);
+    // block returns tuple
+    input! {
+        a: i32,
+        b: i32,
+    }
+    let (max, min) = if a > b { (a, b) } else { (b, a) };
+    assert!(max >= min);
+    println!("big: {}", max);
+    println!("small: {}", min);
+    // unit
+    let unit;
+    unit = {
+        println!("returs ()");
+    };
+    assert_eq!(unit, ());
 }
