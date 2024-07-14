@@ -93,4 +93,32 @@ fn main() {
     let abs;
     abs = if x >= 0 { x } else { -x };
     println!("abs = {}", abs);
+
+    /* Chapter 10: Assert */
+    // assert!
+    input! {
+        x: i32,
+    }
+    //let r = x % 10;
+    let r = x.rem_euclid(10);
+    assert!(0 <= r && r < 10);
+    println!("remaining is {}", r);
+    // assert_eq! / assert_ne!
+    input! {
+        x: i32,
+        y: i32,
+    }
+    let rounded = x / y * y;
+    println!("rounded us {}", rounded);
+    assert_eq!(rounded % y, 0);
+    // panic
+    input! {
+        x: i32,
+    }
+    if x != 0 {
+        let y = 100 / x;
+        println!("{}", y);
+    } else {
+        println!("cannot divide by 0");
+    }
 }
