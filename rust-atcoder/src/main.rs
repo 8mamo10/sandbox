@@ -148,4 +148,29 @@ fn main() {
         println!("returs ()");
     };
     assert_eq!(unit, ());
+
+    /* Chapter 12: Array */
+    let x: isize = 5;
+    println!("x: {}", x);
+    println!("isize: {}", std::any::type_name::<isize>());
+    // array
+    let array: [i64; 5];
+    array = [3, 7, 31, 127, 8191];
+    assert_eq!(array[0], 3);
+    assert_eq!(array[4], 8191);
+    let array = [57; 5];
+    assert_eq!(array[0], 57);
+    assert_eq!(array[4], 57);
+    // pattern match
+    let [x, y, z] = [1, 2, 3];
+    assert_eq!(x, 1);
+    assert_eq!(y, 2);
+    assert_eq!(z, 3);
+    // out of bounds
+    let array = [0, 10, 20, 30, 40, 50];
+    input! {
+        index: usize,
+    }
+    let ans = array[index - 1];
+    println!("{}", ans);
 }
