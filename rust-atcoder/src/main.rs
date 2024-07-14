@@ -173,4 +173,16 @@ fn main() {
     }
     let ans = array[index - 1];
     println!("{}", ans);
+
+    /* Chapter 13: Format output */
+    println!("{0} {0} {1} {1}", -2, 10);
+    println!("{hoge} {hoge} {fuga} {fuga}", hoge = -2, fuga = 10);
+    // format
+    println!("{:6}", 79);
+    println!("{:06}", 79);
+    println!("{:^6}", 79);
+    // debug output
+    let tuple = (10_i32, 20_i32, 30_i32);
+    println!("{:?}", tuple);
+    println!("{:#?}", tuple);
 }
