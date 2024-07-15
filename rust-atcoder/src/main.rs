@@ -185,4 +185,59 @@ fn main() {
     let tuple = (10_i32, 20_i32, 30_i32);
     println!("{:?}", tuple);
     println!("{:#?}", tuple);
+
+    /* Chapter 14: Reference and lifetime */
+    // reference
+    let hoge: i8 = 100;
+    println!("{:p}", &hoge);
+    let reference: &i8 = &hoge;
+    println!("{:p}", reference);
+    println!("{:p}", &reference);
+    //let reference: &u8 = &hoge;
+    // dereferencing
+    let hoge: i8 = 100;
+    let reference = &hoge;
+    assert_eq!(*reference, 100_i8);
+    // dereferencing by operator
+    let hoge: i8 = 100;
+    let reference = &hoge;
+    assert_eq!(reference + 1_i8, 101_i8);
+    // dereferencing by println!
+    let hoge: i8 = 100;
+    let reference = &hoge;
+    println!("{}", reference);
+    // dereferencing by .
+    let tuple: (i32, f64) = (10, 3.14);
+    assert_eq!(tuple.0, 10_i32);
+    assert_eq!(tuple.1, 3.14_f64);
+    let reference = &tuple;
+    assert_eq!(reference.0, 10_i32);
+    assert_eq!(reference.1, 3.14_f64);
+    // pattern match
+    let hoge = 10;
+    let reference = &hoge;
+    let &copied = reference;
+    assert_eq!(copied, 10);
+    println!("hoge:   {:p}", &hoge);
+    println!("copied: {:p}", &copied);
+    // shadowing
+    let hoge = 10;
+    let reference = &hoge;
+    let hoge = 20;
+    assert_eq!(hoge, 20);
+    assert_eq!(*reference, 10);
+    // borrowing and dereferencing constraints
+    let reference;
+    {
+        let hoge = 100;
+        reference = &hoge;
+        println!("{:p}", reference);
+    }
+    // println!("{}", *reference); // borrowed value does not live long enough
+    // static lifetime
+    let reference;
+    {
+        reference = &100;
+    }
+    assert_eq!(*reference, 100);
 }
