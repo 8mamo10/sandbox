@@ -246,4 +246,19 @@ fn main() {
     for p in &primes {
         println!("{}", p);
     }
+
+    /* Chapter 16: pattern matching */
+    let elements: [(i32, f64); 5] = [(6, 12.0), (7, 14.0), (8, 16.0), (15, 31.0), (16, 32.1)];
+    for &(number, weight) in &elements {
+        println!("{}: {:.1}", number, weight);
+    }
+    // ref pattern
+    let hoge = 10;
+    let ref reference = hoge;
+    assert_eq!(*reference, 10);
+
+    let elements: [(i32, f64); 5] = [(6, 12.0), (7, 14.0), (8, 16.0), (15, 31.0), (16, 32.1)];
+    for (number, weight) in &elements {
+        println!("{}: {:.1}", number, weight);
+    }
 }
