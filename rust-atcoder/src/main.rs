@@ -240,4 +240,10 @@ fn main() {
         reference = &100;
     }
     assert_eq!(*reference, 100);
+
+    /* Chapter 15: for expression */
+    let primes = [2, 3, 5, 7];
+    for p in &primes {
+        println!("{}", p);
+    }
 }
