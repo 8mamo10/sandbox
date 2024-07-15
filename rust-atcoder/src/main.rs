@@ -341,4 +341,55 @@ fn main() {
         *i += 1;
     }
     assert_eq!(array, [11, 21, 31]);
+
+    /* Chapter 19: Various loops */
+    // break
+    let array = [2, 3, 0, 4, 5];
+    for &i in &array {
+        if i == 0 {
+            break;
+        }
+        print!("{}, ", i);
+    }
+    println!("end");
+    // continue
+    let array = [2, 3, 0, 4, 5];
+    for &i in &array {
+        if i == 0 {
+            continue;
+        }
+        print!("{}, ", i);
+    }
+    println!("end");
+    // loop
+    loop {
+        input! {
+            x: i32,
+        }
+        if x > 0 {
+            println!("{}", x * 2);
+        } else {
+            break;
+        }
+    }
+    // while
+    let mut x = 120;
+    while x % 2 == 0 {
+        println!("{}", x);
+        x /= 2;
+    }
+    assert_eq!(x, 15);
+    // ..
+    for i in 0..5 {
+        println!("{}", i);
+    }
+    for i in 0..=5 {
+        println!("{}", i);
+    }
+    for i in 3.. {
+        println!("{}", i);
+        if i * i > 30 {
+            break;
+        }
+    }
 }
