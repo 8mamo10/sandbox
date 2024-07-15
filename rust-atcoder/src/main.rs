@@ -261,4 +261,24 @@ fn main() {
     for (number, weight) in &elements {
         println!("{}: {:.1}", number, weight);
     }
+
+    /* Chapter 17: Mutable variable */
+    let mut mutable: i32;
+    mutable = 30;
+    //mutable = 20_f64;
+    assert_eq!(mutable, 30);
+    let (mut hoge, fuga) = (10, 20);
+    assert_eq!(hoge, 10);
+    hoge += 5;
+    assert_eq!(hoge, 15);
+    assert_eq!(fuga, 20);
+    mutable += 20;
+    assert_eq!(mutable, 50);
+    // for + mutable variable
+    let array = [30, 20, 30];
+    let mut sum = 0;
+    for num in &array {
+        sum += num;
+    }
+    assert_eq!(sum, 80);
 }
