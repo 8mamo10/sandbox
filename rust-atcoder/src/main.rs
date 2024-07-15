@@ -281,4 +281,64 @@ fn main() {
         sum += num;
     }
     assert_eq!(sum, 80);
+
+    /* Chapter 18: Mutable reference */
+    // reference to mutable variable
+    let mut hoge = 10;
+    assert_eq!(hoge, 10);
+    hoge = 20;
+    assert_eq!(hoge, 20);
+    let reference = &hoge;
+    println!("{}", reference);
+    //*reference = 20;
+    // lifetime and variability
+    hoge = 30;
+    assert_eq!(hoge, 30);
+    //println!("{}", reference);
+    // multiple usage
+    let mut hoge = 10;
+    let reference1 = &hoge;
+    let reference2 = &hoge;
+    assert_eq!(*reference1, 10);
+    assert_eq!(*reference2, 10);
+    hoge = 20;
+    assert_eq!(hoge, 20);
+    // variable variables of reference type
+    let hoge = 10;
+    let fuga = 20;
+    let mut reference = &hoge;
+    println!("{:p}", reference);
+    assert_eq!(*reference, 10);
+    reference = &fuga;
+    println!("{:p}", reference);
+    assert_eq!(*reference, 20);
+    // variable reference
+    let mut hoge = 10;
+    let reference = &mut hoge;
+    assert_eq!(*reference, 10);
+    *reference = 20;
+    assert_eq!(*reference, 20);
+    let immutable_refecence = &hoge;
+    // error[E0502]: cannot borrow `hoge` as mutable because it is also borrowed as immutable
+    // let mutable_reference = &mut hoge;
+    println!("{}", immutable_refecence);
+    // use of variables borrowed as variable.
+    let mut hoge = 10;
+    let mutable_reference = &mut hoge;
+    *mutable_reference += 30;
+    let immutable_reference = &hoge;
+    let fuga = immutable_reference + 20;
+    assert_eq!(fuga, 60);
+    // pattern match
+    let mut hoge = 10;
+    let &mut copied = &mut hoge;
+    //let &mut copied = &hoge;
+    //let &copied = &mut hoge;
+    assert_eq!(copied, 10);
+    // for expression
+    let mut array = [10, 20, 30];
+    for i in &mut array {
+        *i += 1;
+    }
+    assert_eq!(array, [11, 21, 31]);
 }
