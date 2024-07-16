@@ -392,4 +392,43 @@ fn main() {
             break;
         }
     }
+
+    /* Chapter 20: Loop labels and value returns */
+    // double loop and label
+    'outer: for i in 0..4 {
+        for j in 0..i {
+            if i * j >= 2 {
+                println!();
+                break 'outer;
+            }
+            print!("({}, {}) ", i, j);
+        }
+        println!();
+    }
+    // loop expression that returns a value
+    let value = loop {
+        input! {
+            x: i32,
+        }
+        if x > 0 {
+            println!("{}", x * 2);
+        } else {
+            break x;
+        }
+    };
+    println!("value: {}", value);
+    // lebel
+    let factor = 'input: loop {
+        input! {
+            x: i32,
+        }
+        for i in 2.. {
+            if i * i > x {
+                break;
+            } else if x % i == 0 {
+                break 'input i;
+            }
+        }
+    };
+    println!("{}", factor);
 }
