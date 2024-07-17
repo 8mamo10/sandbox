@@ -465,6 +465,13 @@ fn main() {
     println!("&x: {:p}", &x);
     println!("&y: {:p}", &y);
     println!("z: {:p}", z);
+
+    /* Chapter 23: Recursive function */
+    assert_eq!(fact(3), 6);
+    assert_eq!(digit_sum(6318), 18);
+    assert_eq!(gcd(18, 30), 6);
+    assert_eq!(gcd(30, 18), 6);
+    assert_eq!(gcd(15, 24), 3);
 }
 
 fn fact5() -> i32 {
@@ -503,4 +510,31 @@ fn minimum_factor(n: i32) -> i32 {
         }
     }
     n
+}
+
+fn fact(n: i32) -> i32 {
+    if n == 0 {
+        1
+    } else {
+        fact(n - 1) * n
+    }
+}
+
+fn digit_sum(n: i32) -> i32 {
+    if n == 0 {
+        return 0;
+    }
+    let last_digit = n % 10;
+    let higher_digits_sum = digit_sum(n / 10);
+    let result = higher_digits_sum + last_digit;
+    println!("{} -> {} + {}", n, higher_digits_sum, last_digit);
+    result
+}
+
+fn gcd(m: i32, n: i32) -> i32 {
+    if n == 0 {
+        return m;
+    } else {
+        gcd(n, m % n)
+    }
 }
