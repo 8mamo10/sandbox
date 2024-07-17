@@ -453,6 +453,18 @@ fn main() {
     assert_eq!(var, 5);
     assert_eq!(minimum_factor(2021), 43);
     assert_eq!(minimum_factor(43), 43);
+
+    /* Chapter 22: Crate and pass */
+    let x: i32 = rand::random();
+    println!("{}", x);
+    assert_eq!(std::cmp::max(2, 5), 5);
+    assert_eq!(std::cmp::min(2, 5), 2);
+    let x = 10;
+    let y = 10;
+    let z = std::cmp::max(&x, &y);
+    println!("&x: {:p}", &x);
+    println!("&y: {:p}", &y);
+    println!("z: {:p}", z);
 }
 
 fn fact5() -> i32 {
