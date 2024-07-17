@@ -431,4 +431,64 @@ fn main() {
         }
     };
     println!("{}", factor);
+
+    /* Chapter 21: Function */
+    let value = {
+        let mut n = 1;
+        for i in 1..=5 {
+            print!("{} ", n);
+            n *= i;
+        }
+        println!("{}", n);
+        n
+    };
+    assert_eq!(value, 120);
+    assert_eq!(fact5(), 120);
+    assert_eq!(prod(1, 5), 120);
+    assert_eq!(prod(3, 6), 360);
+    let tuple = (5, 10);
+    assert_eq!(swap(tuple), (10, 5));
+    let var = 5;
+    assert_eq!(double(var), 25);
+    assert_eq!(var, 5);
+    assert_eq!(minimum_factor(2021), 43);
+    assert_eq!(minimum_factor(43), 43);
+}
+
+fn fact5() -> i32 {
+    let mut n = 1;
+    for i in 1..=5 {
+        print!("{} ", n);
+        n *= i;
+    }
+    println!("{}", n);
+    n
+}
+
+fn prod(a: i32, b: i32) -> i32 {
+    let mut n = 1;
+    for i in a..=b {
+        n *= i;
+    }
+    n
+}
+
+fn swap((a, b): (i32, i32)) -> (i32, i32) {
+    (b, a)
+}
+
+fn double(mut x: i32) -> i32 {
+    x *= x;
+    x
+}
+
+fn minimum_factor(n: i32) -> i32 {
+    for i in 2.. {
+        if i * i > n {
+            break;
+        } else if n % i == 0 {
+            return i;
+        }
+    }
+    n
 }
