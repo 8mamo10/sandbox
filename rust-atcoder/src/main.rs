@@ -472,6 +472,54 @@ fn main() {
     assert_eq!(gcd(18, 30), 6);
     assert_eq!(gcd(30, 18), 6);
     assert_eq!(gcd(15, 24), 3);
+
+    /* Chapter 24: Vector */
+    // initialize
+    let x = vec![1, 2, 3];
+    println!("{:?}", x);
+    let x = vec![1; 10];
+    println!("{:?}", x);
+    let x = Vec::<i32>::new();
+    println!("{:?}", x);
+    // length
+    let vector: Vec<i32> = vec![1, 2, 3];
+    assert_eq!(vector.len(), 3_usize);
+    assert_eq!(vector[0], 1_i32);
+    assert_eq!(vector[1], 2_i32);
+    assert_eq!(vector[2], 3_i32);
+    let mut vector: Vec<i32> = vec![1, 2, 3];
+    vector[1] = 10;
+    assert_eq!(vector, vec![1, 10, 3]);
+    // add values
+    let mut vector: Vec<u32>;
+    vector = Vec::new();
+    println!("{:?}", vector);
+    vector.push(10);
+    vector.push(20);
+    vector.push(30);
+    assert_eq!(vector, vec![10, 20, 30]);
+    vector.pop();
+    assert_eq!(vector, vec![10, 20]);
+    vector.pop();
+    vector.pop();
+    assert_eq!(vector, vec![]);
+    // proconio::input!
+    input! {
+        vector: [i32; 2usize],
+    }
+    println!("{} {}", vector[0], vector[1]);
+    input! {
+        n: usize,
+        vector: [i32; n],
+    }
+    println!("{:?}", vector);
+    // for
+    let vector = vec![30, 20, 30];
+    let mut sum = 0;
+    for num in &vector {
+        sum += num;
+    }
+    assert_eq!(sum, 80);
 }
 
 fn fact5() -> i32 {
