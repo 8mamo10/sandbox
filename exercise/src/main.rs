@@ -1,12 +1,11 @@
 fn main() {
     proconio::input! {
-        a: [i32; 4],
+        n: usize,
+        v: [(i64, i64); n],
     }
-    let mut ans = 100;
-    for &i in &a {
-        if i < ans {
-            ans = i;
-        }
+    let mut sum = 0;
+    for (a, b) in &v {
+        sum += (a + b) * (b - a + 1) / 2;
     }
-    println!("{}", ans);
+    println!("{}", sum);
 }
