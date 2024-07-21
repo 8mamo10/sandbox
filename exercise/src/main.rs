@@ -1,13 +1,18 @@
 fn main() {
     proconio::input! {
         n: usize,
-        a: [i64; n],
+        x: [f64; n],
     }
-    let mut max = 0;
-    let mut ans = 0;
-    for i in &a {
-        max = max.max(*i);
-        ans += max - i;
+
+    let mut man: f64 = 0.;
+    let mut euc: f64 = 0.;
+    let mut che: f64 = 0.;
+    for &i in &x {
+        man += i.abs();
+        euc += i * i;
+        che = i.abs().max(che);
     }
-    println!("{}", ans);
+    println!("{}", man);
+    println!("{}", euc.sqrt());
+    println!("{}", che);
 }
