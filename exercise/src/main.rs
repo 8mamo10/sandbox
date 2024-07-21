@@ -1,11 +1,13 @@
 fn main() {
     proconio::input! {
         n: usize,
-        v: [(i64, i64); n],
+        a: [i64; n],
     }
-    let mut sum = 0;
-    for (a, b) in &v {
-        sum += (a + b) * (b - a + 1) / 2;
+    let mut max = 0;
+    let mut ans = 0;
+    for i in &a {
+        max = max.max(*i);
+        ans += max - i;
     }
-    println!("{}", sum);
+    println!("{}", ans);
 }
