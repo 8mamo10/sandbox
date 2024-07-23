@@ -1,18 +1,14 @@
 fn main() {
     proconio::input! {
         n: usize,
-        x: [f64; n],
+        d: usize,
+        v: [(f64, f64); n],
     }
-
-    let mut man: f64 = 0.;
-    let mut euc: f64 = 0.;
-    let mut che: f64 = 0.;
-    for &i in &x {
-        man += i.abs();
-        euc += i * i;
-        che = i.abs().max(che);
+    let mut ans = 0;
+    for &(x, y) in &v {
+        if x.hypot(y) <= d as f64 {
+            ans += 1;
+        }
     }
-    println!("{}", man);
-    println!("{}", euc.sqrt());
-    println!("{}", che);
+    println!("{}", ans);
 }
