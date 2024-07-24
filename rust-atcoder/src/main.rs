@@ -520,6 +520,8 @@ fn main() {
         sum += num;
     }
     assert_eq!(sum, 80);
+
+    /* Chapter 25: Ownership */
 }
 
 fn fact5() -> i32 {
