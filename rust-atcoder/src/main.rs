@@ -522,6 +522,49 @@ fn main() {
     assert_eq!(sum, 80);
 
     /* Chapter 25: Ownership */
+    // ownership
+    let ref_elem;
+    {
+        let vector = vec![10, 20, 30];
+        {
+            let ref_entire = &vector;
+            println!("{:?}", ref_entire);
+        }
+        ref_elem = &vector[1];
+        println!("{:?}", ref_elem);
+    }
+    // assert_eq!(*ref_elem, 20); // `vector` does not live long enough
+    // move
+    let vector = vec![10, 20, 30];
+    let _moved = vector;
+    // println!("{:?}", vector); // borrow of moved value: `vector`
+    // copyable type
+    let value = 10;
+    let copied = value;
+    assert_eq!(value, copied);
+    let digits = {
+        let mut tmp = Vec::new();
+        for i in 0..10 {
+            tmp.push(i);
+        }
+        tmp
+    };
+    println!("{:?}", digits);
+    let test_scores = vec![82, 91, 79];
+    let total_score = sums(test_scores);
+    // assert_eq!(test_scores[0], 82); // borrow of moved value: `test_scores`
+    assert_eq!(total_score, 252);
+    // tuple
+    let tuple: (Vec<i32>, i32) = (vec![], 7);
+    let _moved = tuple;
+    // assert_eq!(tuple.1, 7); // borrow of moved value: `tuple`
+    let vector = vec![];
+    let _tuple: (Vec<i32>, i32) = (vector, 10);
+    // println!("{:?}", vector); // borrow of moved value: `vector`
+    let tuple = (vec![10, 20, 30], 7);
+    let _vector = tuple.0;
+    // assert_eq!(tuple.0[0], 10); // borrow of moved value: `tuple.0`
+    assert_eq!(tuple.1, 7);
 }
 
 fn fact5() -> i32 {
@@ -587,4 +630,12 @@ fn gcd(m: i32, n: i32) -> i32 {
     } else {
         gcd(n, m % n)
     }
+}
+
+fn sums(vector: Vec<i32>) -> i32 {
+    let mut ret = 0;
+    for elem in &vector {
+        ret += elem;
+    }
+    ret
 }
