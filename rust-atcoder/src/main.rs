@@ -565,6 +565,61 @@ fn main() {
     let _vector = tuple.0;
     // assert_eq!(tuple.0[0], 10); // borrow of moved value: `tuple.0`
     assert_eq!(tuple.1, 7);
+
+    /* Chapter 26: Slice */
+    // slice
+    // let slice: [i32];
+    let _ref_slice: &[i32];
+    // type force
+    let mut ref_slice: &[i32];
+    let array = [1, 2, 3];
+    ref_slice = &array;
+    println!("{:?}", ref_slice);
+    let vector = vec![4, 5, 6];
+    ref_slice = &vector;
+    println!("{:?}", ref_slice);
+    // usage
+    let ref_slice: &[i32] = &[50, 20, 30];
+    assert_eq!(ref_slice[0], 50);
+    assert_eq!(ref_slice[1], 20);
+    assert_eq!(ref_slice[2], 30);
+    // ref_slice[3]; // index out of bounds: the len is 3 but the index is 3
+    let ref_slice: &[i32] = &[50, 20, 30];
+    for &i in ref_slice {
+        println!("{}", i);
+    }
+    // partial slice
+    let array = [0, 10, 20, 30, 40, 50];
+    let ref_slice = &array[1..4];
+    println!("{:?}", ref_slice);
+    let ref_slice = &array[1..=4];
+    assert_eq!(ref_slice, [10, 20, 30, 40]);
+    let ref_slice = &array[1..];
+    assert_eq!(ref_slice, [10, 20, 30, 40, 50]);
+    let ref_slice = &array[..4];
+    assert_eq!(ref_slice, [0, 10, 20, 30]);
+    let ref_slice = &array[..];
+    assert_eq!(ref_slice, [0, 10, 20, 30, 40, 50]);
+    // empty slice
+    let empty = &[1, 2, 3, 4, 5][2..2];
+    println!("{:?}", empty);
+    // method
+    let mut array = [0, 10, 20, 30, 40];
+    let ref_mut_slice = &mut array[..];
+    ref_mut_slice.swap(1, 3);
+    assert_eq!(array, [0, 30, 20, 10, 40]);
+    let mut array = [0, 10, 20, 30, 40];
+    array.swap(1, 3);
+    assert_eq!(array, [0, 30, 20, 10, 40]);
+    let mut array = [7, 2, -3, 9, -2, 5];
+    array.reverse();
+    assert_eq!(array, [5, -2, 9, -3, 2, 7]);
+    let mut array = [7, 2, -3, 9, -2, 5];
+    array[1..4].reverse();
+    assert_eq!(array, [7, 9, -3, 2, -2, 5]);
+    let mut array = [7, 2, 5, -3, 9, -2, 5];
+    array.sort();
+    assert_eq!(array, [-3, -2, 2, 5, 5, 7, 9]);
 }
 
 fn fact5() -> i32 {
