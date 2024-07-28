@@ -1,14 +1,13 @@
 fn main() {
     proconio::input! {
         n: usize,
-        d: f64,
-        v: [(f64, f64); n],
+        k: usize,
+        mut p: [usize; n],
     }
+    p.sort();
     let mut ans = 0;
-    for &(x, y) in &v {
-        if x.hypot(y) <= d {
-            ans += 1;
-        }
+    for i in &p[0..k] {
+        ans += i;
     }
     println!("{}", ans);
 }
