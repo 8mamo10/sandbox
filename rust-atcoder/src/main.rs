@@ -620,6 +620,41 @@ fn main() {
     let mut array = [7, 2, 5, -3, 9, -2, 5];
     array.sort();
     assert_eq!(array, [-3, -2, 2, 5, 5, 7, 9]);
+
+    /* Chapter 27: Call by reference  */
+    // arguments and moves
+    let vector = vec![20, 80, 60, 40];
+    let s = sumv(vector);
+    assert_eq!(s, 200);
+    // println!("{:?}", vector); // borrow of moved value: `vector`
+    // call by reference
+    let vector = vec![20, 80, 60, 40];
+    let s: i32 = sumr(&vector);
+    assert_eq!(s, 200);
+    println!("{:?}", vector);
+    // mutable reference
+    let mut hoge = 10;
+    double2(&mut hoge);
+    assert_eq!(hoge, 20);
+    double2(&mut hoge);
+    assert_eq!(hoge, 40);
+    // array and vector borrowing
+    let mut x = 20;
+    let mut y = 30;
+    std::mem::swap(&mut x, &mut y);
+    assert_eq!(x, 30);
+    assert_eq!(y, 20);
+    let mut array = [1, 2, 3, 4, 5];
+    // std::mem::swap(&mut array[0], &mut array[1]); // cannot borrow `array[_]` as mutable more than once at a time
+    array.swap(0, 1);
+    println!("{:?}", array);
+    // dbg!
+    let mut x = 0;
+    for i in 18..=20 {
+        x += i;
+        dbg!(x);
+    }
+    println!("{}", x);
 }
 
 fn fact5() -> i32 {
@@ -693,4 +728,24 @@ fn sums(vector: Vec<i32>) -> i32 {
         ret += elem;
     }
     ret
+}
+
+fn sumv(v: Vec<i32>) -> i32 {
+    let mut ret = 0;
+    for &i in &v {
+        ret += i;
+    }
+    ret
+}
+
+fn sumr(v: &Vec<i32>) -> i32 {
+    let mut ret = 0;
+    for &i in v {
+        ret += i;
+    }
+    ret
+}
+
+fn double2(x: &mut i32) {
+    *x *= 2;
 }
