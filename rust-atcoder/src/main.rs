@@ -655,6 +655,129 @@ fn main() {
         dbg!(x);
     }
     println!("{}", x);
+
+    /* Chapter 28: Pattern Matching and Conditional Branching  */
+    // irrefutable patterns
+    let ref_slice: &[i32] = &[10, 15, 20];
+    if let [x, y, z] = *ref_slice {
+        println!("{} {} {}", x, y, z);
+    } else {
+        println!("Failed to match");
+    }
+    let ref_slice: &[i32] = &[10, 15];
+    if let [x, y, z] = *ref_slice {
+        println!("{} {} {}", x, y, z);
+    } else {
+        println!("Failed to match");
+    }
+    // literal pattern
+    input! {
+        vector: [(i32, i32); 5],
+    }
+    for &tuple in &vector {
+        if let (1, value) = tuple {
+            println!("{}", value);
+        } else if let (2, value) = tuple {
+            println!("{}", value * value);
+        } else if let (0, 0) = tuple {
+            break;
+        } else {
+            println!("?");
+        }
+    }
+    // multiple patterns
+    let array = [(1, 92), (3, 91), (95, 1), (94, 2)];
+    let mut vector = Vec::new();
+    for tuple in &array {
+        if let (1, value) | (value, 2) = *tuple {
+            vector.push(value);
+        }
+    }
+    assert_eq!(vector, vec![92, 94]);
+    let _tuple = (3, 2, 1);
+    //if let (x, 0, 0) | (x, y, 1) | (x, y, 2) = _tuple { // variable `y` is not bound in all patterns
+    let _tuple: (i32, f64) = (1, 2.0);
+    // if let (1, x) | (x, 2.0) = _tuple { // mismatched types a binding must have the same type in all alternatives
+    let tuple = (1, 2);
+    if let (0..=5, x) = tuple {
+        assert_eq!(x, 2);
+    } else {
+        panic!();
+    }
+    // wildcard pattern
+    let tuple = (3, 1, 2);
+    if let (1, _, _) | (_, 1, _) | (_, _, 1) = tuple {
+        println!("At least one of them is 1");
+    }
+    for _ in 0..4 {
+        println!("Knock, knock, knockin' on heaven's door");
+    }
+    let array = [0, 0, 0, 1, 2];
+    let mut ref_slice = &array[..];
+    while let [0, ..] = *ref_slice {
+        ref_slice = &ref_slice[1..];
+    }
+    println!("{:?}", ref_slice);
+    // match expression
+    input! {
+        vector: [(i32, i32); 5],
+    }
+    for &tuple in &vector {
+        match tuple {
+            (1, value) => println!("{}", value),
+            (2, value) => println!("{}", value * value),
+            (0, 0) => break,
+            _ => println!("?"),
+        }
+    }
+    // match expression returns value
+    input! {
+        x: i32,
+    }
+    let y = match x {
+        0 => 1,
+        1 => 0,
+        _ => {
+            println!("neither 0 nor 1");
+            0
+        }
+    };
+    println!("{}", y);
+    input! {
+        x: i32,
+    }
+    match x % 3 {
+        0 => println!("3x"),
+        1 | -2 => println!("3x + 1"),
+        2 | -1 => println!("3x - 1"),
+        _ => unreachable!(),
+    }
+    // the value the match expression returns
+    loop {
+        input! {
+            x: i32,
+        }
+        let y = match x {
+            0 => break,
+            x => x - 1,
+        };
+        println!("{}", y);
+    }
+    // match guard
+    let tuple = (1, 3);
+    match tuple {
+        (1, x) if x % 2 == 0 => println!("{}", x),
+        _ => {}
+    }
+    let tuples = [(2, 5), (4, 4), (1, -4), (-3, -3)];
+    let mut vector = Vec::new();
+    for &tuple in &tuples {
+        match tuple {
+            (x, y) if x == y => vector.push(x),
+            _ => {}
+        }
+    }
+    println!("{:?}", vector);
 }
 
 fn fact5() -> i32 {
