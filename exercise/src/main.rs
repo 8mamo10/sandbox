@@ -2,10 +2,10 @@ fn main() {
     proconio::input! {
         n: usize,
     }
-    match n % 10 {
-        2 | 4 | 5 | 7 | 9 => println!("hon"),
-        0 | 1 | 6 | 8 => println!("pon"),
-        3 => println!("bon"),
+    match n {
+        1..=125 => println!("4"),
+        126..=211 => println!("6"),
+        212..=214 => println!("8"),
         _ => unreachable!(),
     }
 }
