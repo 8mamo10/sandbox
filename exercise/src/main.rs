@@ -5,12 +5,12 @@ fn main() {
     let mut ans = 0;
     let mut count = 0;
     for c in s.chars() {
-        if c == 'R' {
-            count += 1;
-        } else {
-            ans = ans.max(count);
-            count = 0;
+        match c {
+            'R' => count += 1,
+            'S' => count = 0,
+            _ => unreachable!(),
         }
+        ans = ans.max(count);
     }
-    println!("{}", ans.max(count));
+    println!("{}", ans);
 }
