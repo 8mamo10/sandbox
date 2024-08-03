@@ -2,9 +2,9 @@ fn main() {
     proconio::input! {
         s: String,
     }
-    if s == "ABC" {
-        println!("ARC");
-    } else {
-        println!("ABC");
+    match s.as_str() {
+        "ABC" => println!("ARC"),
+        "ARC" => println!("ABC"),
+        _ => unreachable!(),
     }
 }
