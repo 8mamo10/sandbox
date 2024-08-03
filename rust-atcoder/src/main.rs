@@ -778,6 +778,66 @@ fn main() {
         }
     }
     println!("{:?}", vector);
+
+    /* Chapter 28: Character string */
+    let _string = "Hello, world!";
+    let s = String::new();
+    let _slice: &str = &s;
+    let _string = "Hello".to_string();
+    let _string = String::from("Hello");
+    let greeting = "Hello";
+    let world = "world".to_string();
+    println!("{}, {}!", greeting, world);
+    // for expression
+    let s = "打打打打打打打打打打";
+    let da: char = '打';
+    for c in s.chars() {
+        assert_eq!(c, da);
+    }
+    let s = "𠮷野家で𩸽";
+    for c in s.bytes() {
+        println!("{:x}", c);
+    }
+    // conversion from non-string to String
+    let x: i32 = 10;
+    assert_eq!(x.to_string(), "10".to_string());
+    let x: f64 = 120.0;
+    assert_eq!(x.to_string(), "120".to_string());
+    let x: char = 'A';
+    assert_eq!(x.to_string(), "A".to_string());
+    let s = format!("{} {}", 10, 2.5);
+    println!("{}", s);
+    // byte literal
+    let c = b'A';
+    let d = 'A';
+    println!("{:x} {}", c, d);
+    let array = b"Hello";
+    assert_eq!(*array, [b'H', b'e', b'l', b'l', b'o']);
+    // proconio::input!
+    input! {
+        s1: String,
+        s2: String,
+    }
+    println!(r#""{}""#, s1);
+    println!(r#""{}""#, s2);
+    input! {
+        s: proconio::marker::Chars,
+    }
+    for c in &s {
+        println!("{}", c);
+    }
+    input! {
+        s: proconio::marker::Bytes,
+    }
+    for c in &s {
+        println!("{}", c);
+    }
+    input! {
+        c1: char,
+        c2: char,
+        c3: char,
+    }
+    println!("{} {} {}", c1, c2, c3);
 }
 
 fn fact5() -> i32 {
