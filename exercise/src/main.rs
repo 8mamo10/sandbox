@@ -1,10 +1,10 @@
 fn main() {
     proconio::input! {
-        a: char,
+        s: proconio::marker::Chars,
     }
-    match a {
-        'a'..='z' => println!("a"),
-        'A'..='Z' => println!("A"),
-        _ => unreachable!(),
+    if s[2] == s[3] && s[4] == s[5] {
+        println!("Yes");
+    } else {
+        println!("No");
     }
 }
