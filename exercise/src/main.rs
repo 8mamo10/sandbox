@@ -1,11 +1,16 @@
 fn main() {
     proconio::input! {
-        n: usize,
+        s: String,
     }
-    match n {
-        1..=125 => println!("4"),
-        126..=211 => println!("6"),
-        212..=214 => println!("8"),
-        _ => unreachable!(),
+    let mut ans = 0;
+    let mut count = 0;
+    for c in s.chars() {
+        if c == 'R' {
+            count += 1;
+        } else {
+            ans = ans.max(count);
+            count = 0;
+        }
     }
+    println!("{}", ans.max(count));
 }
