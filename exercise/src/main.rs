@@ -1,10 +1,10 @@
 fn main() {
     proconio::input! {
-        s: String,
+        a: char,
     }
-    match s.as_str() {
-        "ABC" => println!("ARC"),
-        "ARC" => println!("ABC"),
+    match a {
+        'a'..='z' => println!("a"),
+        'A'..='Z' => println!("A"),
         _ => unreachable!(),
     }
 }
