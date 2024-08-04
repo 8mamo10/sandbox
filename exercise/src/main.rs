@@ -1,15 +1,14 @@
 fn main() {
     proconio::input! {
-        _: i32,
-        mut x: isize,
-        s: String,
+        n: String,
     }
-    for c in s.chars() {
-        match c {
-            'o' => x += 1,
-            'x' => x = (x - 1).max(0),
-            _ => unreachable!(),
-        }
+    let mut sum = 0;
+    for c in n.chars() {
+        sum += c.to_digit(10).unwrap();
     }
-    println!("{}", x);
+    match sum % 9 {
+        0 => println!("Yes"),
+        1..=9 => println!("No"),
+        _ => unreachable!(),
+    }
 }
