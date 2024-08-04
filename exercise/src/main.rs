@@ -1,10 +1,19 @@
 fn main() {
     proconio::input! {
+        _n: usize,
+        x: usize,
         s: proconio::marker::Chars,
     }
-    if s[2] == s[3] && s[4] == s[5] {
-        println!("Yes");
-    } else {
-        println!("No");
+    let mut ans = x;
+    for c in s {
+        if c == 'o' {
+            ans += 1;
+        } else {
+            if ans == 0 {
+                continue;
+            }
+            ans -= 1;
+        }
     }
+    println!("{}", ans);
 }
