@@ -8,7 +8,7 @@ fn main() {
     }
     match sum % 9 {
         0 => println!("Yes"),
-        1..=9 => println!("No"),
+        1..=8 => println!("No"),
         _ => unreachable!(),
     }
 }
