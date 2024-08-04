@@ -1,19 +1,15 @@
 fn main() {
     proconio::input! {
-        _n: usize,
-        x: usize,
-        s: proconio::marker::Chars,
+        _: i32,
+        mut x: isize,
+        s: String,
     }
-    let mut ans = x;
-    for c in s {
-        if c == 'o' {
-            ans += 1;
-        } else {
-            if ans == 0 {
-                continue;
-            }
-            ans -= 1;
+    for c in s.chars() {
+        match c {
+            'o' => x += 1,
+            'x' => x = (x - 1).max(0),
+            _ => unreachable!(),
         }
     }
-    println!("{}", ans);
+    println!("{}", x);
 }
