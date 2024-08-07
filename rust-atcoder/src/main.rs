@@ -838,6 +838,45 @@ fn main() {
         c3: char,
     }
     println!("{} {} {}", c1, c2, c3);
+
+    /* Chapter 30: Operators and bool types */
+    assert_eq!(std::ops::Add::add(2, 3), 5);
+    assert_eq!(std::ops::Sub::sub(5, 2), 3);
+    assert_eq!(std::ops::Mul::mul(3, 4), 12);
+    assert_eq!(std::ops::Div::div(14, 3), 4);
+    assert_eq!(std::ops::Rem::rem(14, 3), 2);
+    input! {
+        x:i32,
+    }
+    if PartialEq::eq(&x, &5) {
+        println!("x equals to 5.");
+    }
+    for i in 0..=100 {
+        if is_prime(i) {
+            println!("{}", i);
+        }
+    }
+    let result = fnc1() & fnc2();
+    assert_eq!(result, false);
+    let result = fnc1() && fnc2();
+    assert_eq!(result, false);
+    input! {
+        x: i32,
+    }
+    //if (x != 0) & (12 % x == 0) {
+    if (x != 0) && (12 % x == 0) {
+        println!("{} is divisor of 12.", x);
+    }
+    let result = fnc1() | fnc2();
+    assert_eq!(result, true);
+    let result = fnc2() || fnc1();
+    assert_eq!(result, true);
+    assert_eq!(true ^ true, false);
+    assert_eq!(true ^ false, true);
+    assert_eq!(false ^ true, true);
+    assert_eq!(false ^ false, false);
+    assert_eq!(!true, false);
+    assert_eq!(!false, true);
 }
 
 fn fact5() -> i32 {
@@ -931,4 +970,29 @@ fn sumr(v: &Vec<i32>) -> i32 {
 
 fn double2(x: &mut i32) {
     *x *= 2;
+}
+
+fn is_prime(x: i32) -> bool {
+    if x < 2 {
+        return false;
+    }
+    for i in 2.. {
+        if i * i > x {
+            return true;
+        }
+        if x % i == 0 {
+            return false;
+        }
+    }
+    unreachable!();
+}
+
+fn fnc1() -> bool {
+    println!("fnc1: false");
+    false
+}
+
+fn fnc2() -> bool {
+    println!("fnc2: true");
+    true
 }
