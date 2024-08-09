@@ -1,14 +1,20 @@
 fn main() {
     proconio::input! {
-        n: String,
+        s: proconio::marker::Chars,
     }
-    let mut sum = 0;
-    for c in n.chars() {
-        sum += c.to_digit(10).unwrap();
+
+    for i in 0..s.len() {
+        if i % 2 == 0 {
+            if s[i].is_ascii_uppercase() {
+                println!("No");
+                return;
+            }
+        } else {
+            if s[i].is_ascii_lowercase() {
+                println!("No");
+                return;
+            }
+        }
     }
-    match sum % 9 {
-        0 => println!("Yes"),
-        1..=8 => println!("No"),
-        _ => unreachable!(),
-    }
+    println!("Yes");
 }
