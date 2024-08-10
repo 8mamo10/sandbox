@@ -877,6 +877,19 @@ fn main() {
     assert_eq!(false ^ false, false);
     assert_eq!(!true, false);
     assert_eq!(!false, true);
+
+    /* Chapter 30: Bit operation */
+    println!("{:08b}", 25_u8);
+    println!("{:08b}", -25_i8);
+    println!("{:08b}", 231_u8);
+    assert_eq!(-20_i8 & -70_i8, -88_i8);
+    assert_eq!(-20_i8 | -70_i8, -2_i8);
+    assert_eq!(-20_i8 ^ -70_i8, 86_i8);
+    assert_eq!(!25_i8, -26_i8);
+    assert_eq!(100_i8 << 2, -112_i8);
+    assert_eq!(150_u8 >> 2, 37_u8);
+    assert_eq!(50_i8 >> 2, 12_i8);
+    assert_eq!(-50_i8 >> 2, -13_i8);
 }
 
 fn fact5() -> i32 {
