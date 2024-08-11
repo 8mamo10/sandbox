@@ -908,6 +908,30 @@ fn main() {
         }
     }
     println!("-1 -1 -1");
+
+    /* Chapter 32: Function Generics */
+    // generics
+    assert_eq!(second_f64_i32((5., 3)), 3);
+    assert_eq!(second_f32_i32((5., 3)), 3);
+    assert_eq!(second_bool_i32((true, 3)), 3);
+    assert_eq!(second_any_i32::<f64>((5., 3)), 3);
+    assert_eq!(second_any_i32::<f32>((5., 3)), 3);
+    assert_eq!(second_any_i32::<bool>((true, 3)), 3);
+    assert_eq!(second::<bool, i32>((true, 3)), 3);
+    let result = second::<bool, _>((true, 65));
+    assert_eq!(result, b'A');
+    let result = second::<_, _>((true, 65));
+    assert_eq!(result, b'A');
+    let result = second((true, 65));
+    assert_eq!(result, b'A');
+    // trait
+    print(10);
+    print("Hello");
+    //print((10_i32, 20_i32)); // `(i32, i32)` doesn't implement `std::fmt::Display`
+    print2("Hello");
+    print3("Hello");
+    print4("Hello");
+    print_display_and_debug("Hello");
 }
 
 fn fact5() -> i32 {
@@ -1026,4 +1050,54 @@ fn fnc1() -> bool {
 fn fnc2() -> bool {
     println!("fnc2: true");
     true
+}
+
+fn second_f64_i32(tuple: (f64, i32)) -> i32 {
+    tuple.1
+}
+
+fn second_f32_i32(tuple: (f32, i32)) -> i32 {
+    tuple.1
+}
+
+fn second_bool_i32(tuple: (bool, i32)) -> i32 {
+    tuple.1
+}
+
+fn second_any_i32<T>(tuple: (T, i32)) -> i32 {
+    tuple.1
+}
+
+fn second<T, U>(tuple: (T, U)) -> U {
+    let _first: T = tuple.0;
+    let second: U = tuple.1;
+    second
+}
+
+fn print<T: std::fmt::Display>(x: T) {
+    println!("{}", x);
+}
+
+fn print2(x: impl std::fmt::Display) {
+    println!("{}", x);
+}
+
+fn print3<T>(x: T)
+where
+    T: std::fmt::Display,
+{
+    println!("{}", x);
+}
+
+fn print4<T>(x: T) -> T
+where
+    T: std::fmt::Display,
+{
+    println!("{}", x);
+    x
+}
+
+fn print_display_and_debug<T: std::fmt::Display + std::fmt::Debug>(x: T) {
+    println!("{}", x);
+    println!("{:?}", x);
 }
