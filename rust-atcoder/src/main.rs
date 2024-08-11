@@ -890,6 +890,24 @@ fn main() {
     assert_eq!(150_u8 >> 2, 37_u8);
     assert_eq!(50_i8 >> 2, 12_i8);
     assert_eq!(-50_i8 >> 2, -13_i8);
+
+    /* Chapter 31: Time calculation quantity */
+    // ABC085 C
+    input! {
+        n: i32,
+        sum: i32,
+    }
+    for x in 0..=n {
+        for y in 0..=n {
+            for z in 0..=n {
+                if x + y + z == n && x * 10000 + y * 5000 + z * 1000 == sum {
+                    println!("{} {} {}", x, y, z);
+                    return;
+                }
+            }
+        }
+    }
+    println!("-1 -1 -1");
 }
 
 fn fact5() -> i32 {
