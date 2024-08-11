@@ -1,20 +1,19 @@
 fn main() {
     proconio::input! {
-        s: proconio::marker::Chars,
+        n: i32,
+        sum: i32,
     }
-
-    for i in 0..s.len() {
-        if i % 2 == 0 {
-            if s[i].is_ascii_uppercase() {
-                println!("No");
-                return;
+    for x in 0..=n {
+        for y in 0..=n {
+            let z = n - x - y;
+            if z < 0 {
+                continue;
             }
-        } else {
-            if s[i].is_ascii_lowercase() {
-                println!("No");
+            if x * 10000 + y * 5000 + z * 1000 == sum {
+                println!("{} {} {}", x, y, z);
                 return;
             }
         }
     }
-    println!("Yes");
+    println!("-1 -1 -1");
 }
