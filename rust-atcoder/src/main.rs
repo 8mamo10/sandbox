@@ -932,6 +932,8 @@ fn main() {
     print3("Hello");
     print4("Hello");
     print_display_and_debug("Hello");
+
+    /* Chapter 33: Functions that return references */
 }
 
 fn fact5() -> i32 {
