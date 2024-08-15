@@ -902,7 +902,7 @@ fn main() {
             for z in 0..=n {
                 if x + y + z == n && x * 10000 + y * 5000 + z * 1000 == sum {
                     println!("{} {} {}", x, y, z);
-                    return;
+                    break;
                 }
             }
         }
