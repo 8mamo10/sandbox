@@ -967,7 +967,58 @@ fn main() {
         println!("{}{}", i, ordinal_suffix(i))
     }
 
-    /* Chapter 35: Functions that return references */
+    /* Chapter 35: Struct */
+    // tuple structure
+    struct Point(i32, i32);
+    let point: Point;
+    //point = (2_i32, 3_i32);
+    point = Point(2_i32, 3_i32);
+    assert_eq!(point.0, 2);
+    assert_eq!(point.1, 3);
+    let mut point = Point(2, 3);
+    std::mem::swap(&mut point.0, &mut point.1);
+    assert_eq!(point.0, 3);
+    assert_eq!(point.1, 2);
+    // tuple with 1 element
+    let _tuple: (i32,) = (5,);
+    struct Length(i32);
+    let length = Length(10);
+    assert_eq!(length.0, 10);
+    // named field
+    struct Physical {
+        height: i32,
+        weight: i32,
+    }
+    let david = Physical {
+        height: 170,
+        weight: 50,
+    };
+    assert_eq!(david.height, 170);
+    assert_eq!(david.weight, 50);
+    // pattern mutch
+    let point = Point(1, 2);
+    let Point(x, y) = point;
+    assert_eq!(x, 1);
+    assert_eq!(y, 2);
+    let david = Physical {
+        height: 170,
+        weight: 50,
+    };
+    let Physical {
+        height: h,
+        weight: w,
+    } = david;
+    assert_eq!(h, 170);
+    assert_eq!(w, 50);
+    let Physical { weight: w, .. } = david;
+    assert_eq!(w, 50);
+    // field abbreviation notation
+    let height = 170;
+    let david = Physical { height, weight: 50 };
+    assert_eq!(david.height, 170);
+    let Physical { height, weight: w } = david;
+    assert_eq!(height, 170);
+    assert_eq!(w, 50);
 }
 
 fn fact5() -> i32 {
