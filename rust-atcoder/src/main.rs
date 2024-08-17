@@ -779,7 +779,7 @@ fn main() {
     }
     println!("{:?}", vector);
 
-    /* Chapter 28: Character string */
+    /* Chapter 29: Character string */
     let _string = "Hello, world!";
     let s = String::new();
     let _slice: &str = &s;
@@ -878,7 +878,7 @@ fn main() {
     assert_eq!(!true, false);
     assert_eq!(!false, true);
 
-    /* Chapter 30: Bit operation */
+    /* Chapter 31: Bit operation */
     println!("{:08b}", 25_u8);
     println!("{:08b}", -25_i8);
     println!("{:08b}", 231_u8);
@@ -891,7 +891,7 @@ fn main() {
     assert_eq!(50_i8 >> 2, 12_i8);
     assert_eq!(-50_i8 >> 2, -13_i8);
 
-    /* Chapter 31: Time calculation quantity */
+    /* Chapter 32: Time calculation quantity */
     // ABC085 C
     input! {
         n: i32,
@@ -909,7 +909,7 @@ fn main() {
     }
     println!("-1 -1 -1");
 
-    /* Chapter 32: Function Generics */
+    /* Chapter 33: Function Generics */
     // generics
     assert_eq!(second_f64_i32((5., 3)), 3);
     assert_eq!(second_f32_i32((5., 3)), 3);
@@ -933,7 +933,7 @@ fn main() {
     print4("Hello");
     print_display_and_debug("Hello");
 
-    /* Chapter 33: Functions that return references */
+    /* Chapter 34: Functions that return references */
     let vec = vec![2, 4, 7, 8, 6, 3, 5];
     let slice = &vec[..];
     let mut inc = slice;
@@ -966,6 +966,8 @@ fn main() {
     for i in 0..50 {
         println!("{}{}", i, ordinal_suffix(i))
     }
+
+    /* Chapter 35: Functions that return references */
 }
 
 fn fact5() -> i32 {
