@@ -1019,6 +1019,25 @@ fn main() {
     let Physical { height, weight: w } = david;
     assert_eq!(height, 170);
     assert_eq!(w, 50);
+
+    /* Chapter 36: Enumerated type */
+    let shape1: Shape = Shape::Triangle2(1.5, 2., 2.5);
+    let shape2: Shape = Shape::Rectangle2 {
+        height: 1.,
+        width: 2.5,
+    };
+    let shape3: Shape = Shape::Circle2 { radius: 2. };
+    assert_eq!(is_triangle(&Shape::Triangle), true);
+    assert_eq!(is_triangle(&Shape::Rectangle), false);
+    assert_eq!(is_triangle(&Shape::Circle), false);
+    assert_eq!(is_triangle(&shape1), false);
+    assert_eq!(is_triangle(&shape2), false);
+    assert_eq!(is_triangle(&shape3), false);
+    assert_eq!(is_triangle2(&Shape::Triangle), true);
+    assert_eq!(is_triangle3(&Shape::Triangle), true);
+    assert!(((area(&shape1) - 1.5).abs() < 1e-6));
+    assert!(((area(&shape2) - 2.5).abs() < 1e-6));
+    assert!((area(&shape3) - 12.566371).abs() < 1e-6);
 }
 
 fn fact5() -> i32 {
@@ -1233,5 +1252,49 @@ fn ordinal_suffix(number: u32) -> &'static str {
         (2, _) => "nd",
         (3, _) => "rd",
         _ => "th",
+    }
+}
+
+enum Shape {
+    Triangle,
+    Triangle2(f64, f64, f64),
+    Rectangle,
+    Rectangle2 { height: f64, width: f64 },
+    Circle,
+    Circle2 { radius: f64 },
+}
+
+fn is_triangle(shape: &Shape) -> bool {
+    if let Shape::Triangle = *shape {
+        true
+    } else {
+        false
+    }
+}
+
+fn is_triangle2(shape: &Shape) -> bool {
+    match *shape {
+        Shape::Triangle => true,
+        _ => false,
+    }
+}
+
+fn is_triangle3(shape: &Shape) -> bool {
+    matches!(*shape, Shape::Triangle)
+}
+
+fn area(shape: &Shape) -> f64 {
+    match *shape {
+        Shape::Triangle2(a, b, c) => {
+            let s = (a + b + c) / 2.;
+            let squared = s * (s - a) * (s - b) * (s - c);
+            squared.sqrt()
+        }
+        Shape::Rectangle2 {
+            height: h,
+            width: w,
+        } => h * w,
+        Shape::Circle2 { radius } => radius * radius * std::f64::consts::PI,
+        _ => 0.,
     }
 }
