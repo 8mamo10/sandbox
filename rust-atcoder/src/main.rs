@@ -1038,6 +1038,28 @@ fn main() {
     assert!(((area(&shape1) - 1.5).abs() < 1e-6));
     assert!(((area(&shape2) - 2.5).abs() < 1e-6));
     assert!((area(&shape3) - 12.566371).abs() < 1e-6);
+
+    /* Chapter 37: Method */
+    let v = Vector(1., 1.);
+    let r = Vector::length(&v);
+    assert!((r - 1.41421356).abs() < 1e-6);
+    let r = v.length();
+    assert!((r - 1.41421356).abs() < 1e-6);
+    let v = Vector(1., 2.);
+    let tuple = v.into_tuple();
+    assert!((tuple.0 - 1.).abs() < 1e-6);
+    assert!((tuple.1 - 2.).abs() < 1e-6);
+    let mut v = Vector(2., 3.);
+    v.inverse();
+    assert!((v.0 + 2.).abs() < 1e-6);
+    assert!((v.1 + 3.).abs() < 1e-6);
+    let v = Vector(2., 3.);
+    let scaled = v.scale(5.);
+    assert!((scaled.0 - 10.).abs() < 1e-6);
+    assert!((scaled.1 - 15.).abs() < 1e-6);
+    let z = Vector::zero();
+    assert!((z.0).abs() < 1e-6);
+    assert!((z.1).abs() < 1e-6);
 }
 
 fn fact5() -> i32 {
@@ -1296,5 +1318,35 @@ fn area(shape: &Shape) -> f64 {
         } => h * w,
         Shape::Circle2 { radius } => radius * radius * std::f64::consts::PI,
         _ => 0.,
+    }
+}
+
+struct Vector(f64, f64);
+
+impl Vector {
+    //fn length(self: &Vector) -> f64 {
+    fn length(&self) -> f64 {
+        let Vector(x, y) = *self;
+        (x * x + y * y).sqrt()
+    }
+
+    //fn inverse(self: &mut Vector) {
+    fn inverse(&mut self) {
+        self.0 = -self.0;
+        self.1 = -self.1;
+    }
+
+    //fn into_tuple(self: Vector) -> (f64, f64) {
+    fn into_tuple(self) -> (f64, f64) {
+        (self.0, self.1)
+    }
+
+    fn scale(self: &Vector, factor: f64) -> Vector {
+        let Vector(x, y) = *self;
+        Vector(factor * x, factor * y)
+    }
+
+    fn zero() -> Vector {
+        Vector(0., 0.)
     }
 }
