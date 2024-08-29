@@ -1060,6 +1060,9 @@ fn main() {
     let z = Vector::zero();
     assert!((z.0).abs() < 1e-6);
     assert!((z.1).abs() < 1e-6);
+
+    let circle: Shape = Shape::Circle2 { radius: 2. };
+    println!("{}", circle.area());
 }
 
 fn fact5() -> i32 {
@@ -1318,6 +1321,24 @@ fn area(shape: &Shape) -> f64 {
         } => h * w,
         Shape::Circle2 { radius } => radius * radius * std::f64::consts::PI,
         _ => 0.,
+    }
+}
+
+impl Shape {
+    fn area(&self) -> f64 {
+        match *self {
+            Shape::Triangle2(a, b, c) => {
+                let s = (a + b + c) / 2.;
+                let squared = s * (s - a) * (s - b) * (s - c);
+                squared.sqrt()
+            }
+            Shape::Rectangle2 {
+                height: h,
+                width: w,
+            } => h * w,
+            Shape::Circle2 { radius } => radius * radius * std::f64::consts::PI,
+            _ => 0.0,
+        }
     }
 }
 
