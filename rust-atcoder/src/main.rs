@@ -1063,6 +1063,15 @@ fn main() {
 
     let circle: Shape = Shape::Circle2 { radius: 2. };
     println!("{}", circle.area());
+
+    /* Chapter 38: Generics of structures and enumerations */
+    let p: PointG<i32> = PointG::<i32>(1, 5);
+    let _p: PointG<f64> = PointG::<f64>(1., 5.);
+    let _p: PointG<_> = PointG::<f64>(1., 5.);
+    let _p: PointG<f64> = PointG::<_>(1., 5.);
+    assert_eq!((*p.abscissa()), 1);
+    let p: PointG<i64> = PointG::<i64>(1, 5);
+    assert_eq!((*p.abscissa()), 1);
 }
 
 fn fact5() -> i32 {
@@ -1369,5 +1378,13 @@ impl Vector {
 
     fn zero() -> Vector {
         Vector(0., 0.)
+    }
+}
+
+struct PointG<T>(T, T);
+
+impl<T> PointG<T> {
+    fn abscissa(&self) -> &T {
+        &self.0
     }
 }
