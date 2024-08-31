@@ -1072,6 +1072,14 @@ fn main() {
     assert_eq!((*p.abscissa()), 1);
     let p: PointG<i64> = PointG::<i64>(1, 5);
     assert_eq!((*p.abscissa()), 1);
+
+    /* Chapter 39: Option */
+    let x = Some(10);
+    let y = None;
+    let z: i32 = match y {
+        Some(i) => i,
+        None => -1,
+    };
 }
 
 fn fact5() -> i32 {
