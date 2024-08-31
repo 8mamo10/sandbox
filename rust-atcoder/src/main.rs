@@ -1074,12 +1074,30 @@ fn main() {
     assert_eq!((*p.abscissa()), 1);
 
     /* Chapter 39: Option */
-    let x = Some(10);
+    let _x = Some(10);
     let y = None;
-    let z: i32 = match y {
+    let _z: i32 = match y {
         Some(i) => i,
         None => -1,
     };
+    assert!(Some(10) == Some(10));
+    assert!(Some(10) != Some(15));
+    assert!(Some(10) != None);
+    assert!(Option::<i32>::None == None);
+    assert!(Some(10) < Some(15));
+    assert!(Some(10) > None);
+    let x = Some(10);
+    let _copied = x;
+    assert_eq!(x, Some(10));
+    let mut v = vec![10];
+    assert_eq!(v.pop(), Some(10));
+    assert_eq!(v.pop(), None);
+    let a = [3, 1, 4, 1, 5];
+    assert_eq!(a.get(2), Some(&4));
+    assert_eq!(a.get(5), None);
+    let x: i32 = 1000000000;
+    let y: i32 = 2000000000;
+    assert!(x.checked_add(y).is_none());
 }
 
 fn fact5() -> i32 {
