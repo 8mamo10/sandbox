@@ -1098,6 +1098,20 @@ fn main() {
     let x: i32 = 1000000000;
     let y: i32 = 2000000000;
     assert!(x.checked_add(y).is_none());
+
+    /* Chapter 40: Result */
+    let result = "120".parse();
+    assert!(matches!(result, Ok(120)));
+    assert!(result.is_ok());
+    assert_eq!(result.unwrap(), 120);
+    //let result: Result<i32, ParseIntError> = "xxx".parse();
+    let result = "xxx".parse();
+    assert!(matches!(result, Err(_)));
+    assert!(result.is_err());
+    if let Err(ref err) = result {
+        eprintln!("{}", err);
+    }
+    assert_eq!(result.unwrap_or(-1), -1);
 }
 
 fn fact5() -> i32 {
